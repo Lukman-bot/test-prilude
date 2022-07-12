@@ -1,83 +1,74 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Log in | Lukman Aditiya Anggara</title>
-    <link href="" rel="icon">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?= base_url('__assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= base_url('__assets/bower_components/font-awesome/css/font-awesome.min.css') ?>">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="<?= base_url('__assets/bower_components/Ionicons/css/ionicons.min.css') ?>">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?= base_url('__assets/dist/css/AdminLTE.min.css') ?>">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?= base_url('__assets/plugins/iCheck/square/blue.css') ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="img/logo/logo.png" rel="icon">
+    <title>Lukman Aditiya - Login</title>
+    <link href="<?= base_url('__assets/vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('__assets/vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('__assets/css/ruang-admin.min.css') ?>" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="<?= base_url('Home') ?>"><b>Test</b>Prilude
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="../../index2.html" method="post">
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
-                
+<body class="bg-gradient-login">
+    <!-- Login Content -->
+    <div class="container-login">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-12 col-md-9">
+                <div class="card shadow-sm my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="login-form">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                        <?php
+                                        if (!empty($this->session->flashdata('pesan'))) { ?>
+                                            <div class="alert alert-warning alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <h4><i class="icon fa fa-warning"></i> Pemberitahuan</h4>
+                                                <?= $this->session->flashdata('pesan'); ?>
+                                            </div>
+                                        <?php    }
+                                        ?>
+                                    </div>
+                                    <form class="user" action="<?= base_url() ?>adminn/Auth/" method="POST">
+                                        <div class="form-group">
+                                            <input type="username" name="username" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                                            placeholder="Masukkan Email Anda">
+                                            <font color="red"><?= form_error('username') ?></font> 
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Masukkan Password Anda">
+                                            <font color="red"><?= form_error('password') ?></font> 
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-block" type="submit">Login</button>
+                                        </div>
+                                        <hr>
+                                    </form>
+                                    <div class="text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                </div>
-                <!-- /.col -->
             </div>
-        </form>
-
+        </div>
     </div>
-    <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery 3 -->
-<script src="<?= base_url('__assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url('__assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
-<!-- iCheck -->
-<script src="<?= base_url('__assets/plugins/iCheck/icheck.min.js') ?>"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
+    <!-- Login Content -->
+    <script src="<?= base_url('__assets/vendor/jquery/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('__assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('__assets/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
+    <script src="<?= base_url('__assets/js/ruang-admin.min.js') ?>"></script>
 </body>
+
 </html>

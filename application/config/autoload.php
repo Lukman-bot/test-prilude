@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $autoload['packages'] = array();
 
-$autoload['libraries'] = array('session', 'form_validation');
+$autoload['libraries'] = array('session', 'form_validation', 'database');
 
 $autoload['drivers'] = array();
 
@@ -13,4 +13,4 @@ $autoload['config'] = array();
 
 $autoload['language'] = array();
 
-$autoload['model'] = array();
+$autoload['model'] = array('Mod_menu' => 'menu', 'Mod_admin' => 'admin');
