@@ -74,10 +74,11 @@
                                             </a>
                                             <button class='btn btn-danger btn-sm' onClick='hapus($showKaryawan->karyawanid)' title='Hapus'>
                                                 <i class='fas fa-trash'></i>
+                                            </button>"; ?>
+                                            <button class="btn btn-info btn-sm" title="Add Detail Karyawan" data-toggle="modal" data-target="#modal-add-<?= $showKaryawan->karyawanid ?>">
+                                                <li class="fa fa-plus"></li>
                                             </button>
-                                            <a href=".base_url()."adminn/Karyawan/AddDetail/".$showKaryawan->karyawanid." class='btn btn-success btn-sm' title='Tambah Detail'>
-                                                <i class='fas fa-plus'></i>
-                                            </a>
+                                        <?php echo "
                                             <a href=".base_url()."adminn/Karyawan/Detail/".$showKaryawan->karyawanid." class='btn btn-secondary btn-sm' title='Detail Karyawan'>
                                                 <i class='fas fa-eye'></i>
                                             </a>
@@ -136,3 +137,67 @@
         </div>
     </div>
 </div>
+<!-- End Modal -->
+
+<!-- Modal Add Detail Karyawan -->
+<?php
+    foreach ($idKaryawan->result_array() as $showID) :
+?>
+    <div class="modal fade" id="modal-add-<?php echo $showID['karyawanid'] ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Detail Karyawan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?php echo base_url('adminn/Karyawan/AddDetail') ?>" method="POST">
+                    <div class="modal-body">
+                        <input type="text" name="idkaryawan" value="<?php echo $showID['karyawanid'] ?>">
+
+                        <p>Nama Karyawan</p>
+                        <p><input type="text" name="namakaryawan" class="form form-control" placeholder="Lukman Aditiya Anggara"></p>
+
+                        <p>Nomor Telepon Karyawan</p>
+                        <p><input type="text" name="noteleponkaryawan" class="form form-control" placeholder="089510396303"></p>
+
+                        <p>Email Karyawan</p>
+                        <p><input type="email" name="emailkaryawan" class="form form-control" placeholder="bunga.langensari@gmail.com"></p>
+
+                        <p>Kota Kelahiran</p>
+                        <p><input type="text" name="kotalahirkaryawan" class="form form-control" placeholder="Bekasi"></p>
+
+                        <p>Tanggal Lahir</p>
+                        <div class="form-group" id="simple-date1">
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="simpleDataInput" name="tanggallahirkaryawan" placeholder="06/04/2004">
+                            </div>
+                        </div>
+
+                        <p>NIK Karyawan</p>
+                        <input type="text" name="nikkaryawan" class="form form-control">
+
+                        <p>Alamat</p>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamatkaryawan"></textarea>
+                    </div>
+
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <li class="fa fa-undo"></li> Batal
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <li class="fa fa-save"></li> Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php
+    endforeach;
+?>
+<!-- End Modal Add Detail Karyawan -->

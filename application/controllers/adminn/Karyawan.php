@@ -20,6 +20,7 @@ class Karyawan extends CI_Controller
             'page'              => 'karyawan/index',
             'footer'            => 'LukmanSoft',
             'dataKaryawan'      => $this->karyawan->getDataKaryawan()->result(),
+            'idKaryawan'        => $this->karyawan->getIdKaryawan(),
             'user'              => $this->admin->mengambil('user',['namauser' => $this->session->userdata('namauser')])->row_array(),
             'photo'             => $this->admin->mengambil('user',['photo' => $this->session->userdata('photo')])->row_array()
         );
@@ -188,6 +189,33 @@ class Karyawan extends CI_Controller
         $this->db->where('karyawanid', $karyawanid);
         $data=$this->db->get('karyawan')->row();
         echo json_encode($data);
+    }
+
+    public function Detail($karyawanid)
+    {
+        $data['title']          = 'Detail Karyawan';
+        $data['page']           = 'karyawan/detail';
+        $data['user']           = $this->admin->mengambil('user',['namauser' => $this->session->userdata('namauser')])->row_array();
+        $data['photo']          = $this->admin->mengambil('user',['photo' => $this->session->userdata('photo')])->row_array();
+        $data['detail']         = $this->karyawan->getDetail($karyawanid)->row();
+        $data['footer']         = 'LukmanSoft';
+
+        $this->load->view('admin/main', $data);
+    }
+
+    public function AddDetail()
+    {
+        $this->form_validation->set_rules('namakaryawan', 'Nama Karyawan', 'required');
+        $this->form_validation->set_rules('noteleponkaryawan', 'Nomor Telepon', 'required');
+        $this->form_validation->set_rules('emailkaryawan', 'Email', 'required');
+        if ($this->form_validation->run()==FALSE) {
+            $this->session->set_flashdata('gagal', 'Detail Karyawan Gagal Disimpan');
+            redirect('adminn/Karyawan');
+        } else {
+            $this->karyawan->AddDetail();
+            $this->session->set_flashdata('berhasil', 'Data Karyawan Berhasil Disimpan');
+            redirect('adminn/Karyawan');
+        }
     }
 
 }

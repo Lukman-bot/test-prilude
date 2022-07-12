@@ -9,6 +9,13 @@ class Mod_karyawan extends CI_Model {
         return $this->db->get();
     }
 
+    public function getIdKaryawan()
+    {   
+        $this->db->select('*');
+        $this->db->from('karyawan');
+        return $this->db->get();
+    }
+
     public function getDefaultValues()
     {
         return [
@@ -67,5 +74,39 @@ class Mod_karyawan extends CI_Model {
     public function AmbilAkses()
     {
         return $this->db->get('akses');
+    }
+
+    public function getDetail($karyawanid)
+    {
+        $this->db->select('*');
+        $this->db->from('karyawan');
+        $this->db->join('detailkaryawan', 'karyawan.karyawanid=detailkaryawan.idkaryawan', 'left');
+        $this->db->where('karyawan.karyawanid', $karyawanid);
+        return $this->db->get();
+    }
+
+    public function AddDetail()
+    {
+        $idkaryawan         = $this->input->post('idkaryawan', TRUE);
+        $nama               = $this->input->post('namakaryawan', TRUE);
+        $notelepon          = $this->input->post('noteleponkaryawan', TRUE);
+        $emailkaryawan      = $this->input->post('emailkaryawan', TRUE);
+        $kotalahir          = $this->input->post('kotalahirkaryawan', TRUE);
+        $tanggallahir       = $this->input->post('tanggallahirkaryawan', TRUE);
+        $nik                = $this->input->post('nikkaryawan', TRUE);
+        $alamat             = $this->input->post('alamatkaryawan', TRUE);
+
+        $data=array(
+            'idkaryawan'            => $idkaryawan,
+            'namakaryawan'          => $nama,
+            'noteleponkaryawan'     => $notelepon,
+            'emailkaryawan'         => $emailkaryawan,
+            'kotalahirkaryawan'     => $kotalahir,
+            'tanggallahirkaryawan'  => $tanggallahir,
+            'nikkaryawan'           => $nik,
+            'alamatkaryawan'        => $alamat
+        );
+
+        $this->db->insert('detailkaryawan', $data);
     }
 }
