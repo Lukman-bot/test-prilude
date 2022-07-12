@@ -92,7 +92,7 @@
 
 		<div class="row mt-4">
 			<div class="col-10 offset-2">
-				<a href="<?= base_url('superadminn/Admin') ?>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-left mr-1"></i>Kembali</a>
+				<a href="<?= base_url('adminn/User') ?>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-left mr-1"></i>Kembali</a>
 				<button type="submit" class="btn btn-sm btn-primary float-right"><i class="fas fa-check mr-1"></i> Simpan</button>
 			</div>
 		</div>

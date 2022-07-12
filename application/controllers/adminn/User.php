@@ -85,7 +85,7 @@ class User extends CI_Controller {
             ];
 
             if (!empty($_FILES['photo']['name'])){
-                $imageName = url_title($data['username'], true) . '-';
+                $imageName = url_title($data['username'], true) . '-' . $data['namauser'];
                 $upload = $this->user->uploadImage($imageName);
                 $this->_create_thumbs($upload);
                 $data['photo']  = $upload;
@@ -138,8 +138,8 @@ class User extends CI_Controller {
                 'footer'        => 'LukmanSoft',
                 'form_action'   => base_url('adminn/User/Update/' . $id),
                 'input'         => $input,
-                'user'          => $this->admin->mengambil('users',['namauser' => $this->session->userdata('namauser')])->row_array(),
-                'photo'         => $this->admin->mengambil('users',['photo' => $this->session->userdata('photo')])->row_array()
+                'user'          => $this->admin->mengambil('user',['namauser' => $this->session->userdata('namauser')])->row_array(),
+                'photo'         => $this->admin->mengambil('user',['photo' => $this->session->userdata('photo')])->row_array()
             );
 
             $this->load->view('admin/main', $data);
@@ -156,7 +156,7 @@ class User extends CI_Controller {
             ];
 
             if (!empty($_FILES['photo']['name'])) {
-                $imageName = url_title($data['name'], '-', true) . '-';
+                $imageName = url_title($data['username'], '-', true) . '-' . $data['namauser'];
                 $upload = $this->user->uploadImage($imageName);
                 $this->_create_thumbs($upload);
 
