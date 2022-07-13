@@ -13,6 +13,7 @@ class Mod_karyawan extends CI_Model {
     {   
         $this->db->select('*');
         $this->db->from('karyawan');
+        $this->db->join('detailkaryawan', 'karyawan.karyawanid=detailkaryawan.idkaryawan', 'left');
         return $this->db->get();
     }
 
@@ -108,6 +109,31 @@ class Mod_karyawan extends CI_Model {
         );
 
         $this->db->insert('detailkaryawan', $data);
+    }
+
+    public function UpdateDetail($idkaryawan)
+    {
+        $nama               = $this->input->post('namakaryawan', TRUE);
+        $notelepon          = $this->input->post('noteleponkaryawan', TRUE);
+        $emailkaryawan      = $this->input->post('emailkaryawan', TRUE);
+        $kotalahir          = $this->input->post('kotalahirkaryawan', TRUE);
+        $tanggallahir       = $this->input->post('tanggallahirkaryawan', TRUE);
+        $nik                = $this->input->post('nikkaryawan', TRUE);
+        $alamat             = $this->input->post('alamatkaryawan', TRUE);
+
+        $data=array(
+            'namakaryawan'          => $nama,
+            'noteleponkaryawan'     => $notelepon,
+            'emailkaryawan'         => $emailkaryawan,
+            'kotalahirkaryawan'     => $kotalahir,
+            'tanggallahirkaryawan'  => $tanggallahir,
+            'nikkaryawan'           => $nik,
+            'alamatkaryawan'        => $alamat
+        );
+
+        $this->db->set($data);
+        $this->db->where('idkaryawan', $idkaryawan);
+        $this->db->update('detailkaryawan');
     }
 
     public function getProfile($karyawanid)

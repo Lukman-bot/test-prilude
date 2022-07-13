@@ -198,6 +198,7 @@ class Karyawan extends CI_Controller
         $data['user']           = $this->admin->mengambil('user',['namauser' => $this->session->userdata('namauser')])->row_array();
         $data['photo']          = $this->admin->mengambil('user',['photo' => $this->session->userdata('photo')])->row_array();
         $data['detail']         = $this->karyawan->getDetail($karyawanid)->row();
+        $data['idKaryawan']     = $this->karyawan->getIdKaryawan();
         $data['footer']         = 'LukmanSoft';
 
         $this->load->view('admin/main', $data);
@@ -213,6 +214,22 @@ class Karyawan extends CI_Controller
             redirect('adminn/Karyawan');
         } else {
             $this->karyawan->AddDetail();
+            $this->session->set_flashdata('berhasil', 'Data Karyawan Berhasil Disimpan');
+            redirect('adminn/Karyawan');
+        }
+    }
+
+    public function UpdateDetail()
+    {
+        $this->form_validation->set_rules('namakaryawan', 'Nama Karyawan', 'required');
+        $this->form_validation->set_rules('noteleponkaryawan', 'Nomor Telepon', 'required');
+        $this->form_validation->set_rules('emailkaryawan', 'Email', 'required');
+        $idkaryawan = $this->input->post('idkaryawan', TRUE);
+        if ($this->form_validation->run()==FALSE) {
+            $this->session->set_flashdata('gagal', 'Detail Karyawan Gagal Disimpan');
+            redirect('adminn/Karyawan');
+        } else {
+            $this->karyawan->UpdateDetail($idkaryawan);
             $this->session->set_flashdata('berhasil', 'Data Karyawan Berhasil Disimpan');
             redirect('adminn/Karyawan');
         }
