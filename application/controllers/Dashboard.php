@@ -11,12 +11,16 @@ class Dashboard extends CI_Controller
             redirect(base_url());
             return;
         }
+        $idkaryawan = $this->session->userdata('karyawanid');
+        $this->load->model('Mod_absen', 'absen');
     }
-    public function index()
+
+    public function index($idkaryawan)
     {
         $data['title']      = 'Beranda';
         $data['footer']     = 'Lukman Aditiya';
         $data['page']       = 'dashboard/index';
+        $data['dataAbsen']  = $this->absen->getAbsenKaryawan($idkaryawan)->result();
 
         $this->load->view('karyawan/main', $data);
     }

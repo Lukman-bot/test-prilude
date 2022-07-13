@@ -23,8 +23,9 @@ class Auth extends CI_Controller {
                         );
                         $this->session->set_userdata($session_data);
                         $this->session->set_flashdata('message', 'Selamat Datang!');
+                        $idkaryawan = $this->session->userdata('karyawanid');
 
-                        redirect('Dashboard');
+                        redirect("Dashboard/index/$idkaryawan");
                     } else {
                         $this->session->set_flashdata('pesan', 'Password yang anda masukkan tidak sesuai, silahkan cek kembali');
                         $data['title']      = 'Login Page';

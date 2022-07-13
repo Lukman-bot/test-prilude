@@ -12,73 +12,62 @@
         </div> 
     </div> 
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Simple Tables</h1>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
-            </ol>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12 mb-4">
-              <!-- Simple Tables -->
-              <div class="card">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Simple Tables</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Table Absen</h6>
                 </div>
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="row">
+                    <div class="col">
+                        <div class="card-header d-flex flex-row align-items-center justify-content-between">
+                            <a href="<?= base_url('adminn/Absen/Add') ?>" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus"></i> Tambah
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer"></div>
-              </div>
+                <div class="table-responsive p-3">
+                    <table id="dataTable" class="table align-items-center table-fluish">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tanggal</th>
+                                <th>Nama Karyawan</th>
+                                <th>Nomor Telepon</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $no = 1;
+                                foreach ($dataAbsen as $showAbsen) { ?>
+                                    <tr>
+                                        <td><?= $no ?></td>
+                                        <td><?= $showAbsen->tanggal ?></td>
+                                        <td><?= $showAbsen->namakaryawan ?></td>
+                                        <td><?= $showAbsen->noteleponkaryawan ?></td>
+                                        <td>
+                                            <?php
+                                                if ($showAbsen->absen == 'H') {
+                                                    echo "<span class='badge badge-success'>Hadir</span>";
+                                                } if ($showAbsen->absen == 'T') {
+                                                    echo "<span class='badge badge-warning'>Telat</span>";
+                                                } if ($showAbsen->absen == 'I') {
+                                                    echo "<span class='badge badge-primary'>Izin</span>";
+                                                } if ($showAbsen->absen == 'A') {
+                                                    echo "<span class='badge badge-danger'>Alpha</span>";
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>   
+                                    <?php
+                                    $no++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
+        </div>
+    </div>

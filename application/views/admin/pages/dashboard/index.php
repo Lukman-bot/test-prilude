@@ -75,8 +75,20 @@
                                         <td><?= $no ?></td>
                                         <td><?= $showAbsen->tanggal ?></td>
                                         <td><?= $showAbsen->namakaryawan ?></td>
-                                        <td><?= $showAbsen->notelepon ?></td>
-                                        <td><?= $showAbsen->absen ?></td>
+                                        <td><?= $showAbsen->noteleponkaryawan ?></td>
+                                        <td>
+                                            <?php
+                                                if ($showAbsen->absen == 'H') {
+                                                    echo "<span class='badge badge-success'>Hadir</span>";
+                                                } if ($showAbsen->absen == 'T') {
+                                                    echo "<span class='badge badge-warning'>Telat</span>";
+                                                } if ($showAbsen->absen == 'I') {
+                                                    echo "<span class='badge badge-primary'>Izin</span>";
+                                                } if ($showAbsen->absen == 'A') {
+                                                    echo "<span class='badge badge-danger'>Alpha</span>";
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>   
                                     <?php
                                     $no++;
