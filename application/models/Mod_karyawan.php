@@ -82,6 +82,7 @@ class Mod_karyawan extends CI_Model {
         $this->db->select('*');
         $this->db->from('karyawan');
         $this->db->join('detailkaryawan', 'karyawan.karyawanid=detailkaryawan.idkaryawan', 'left');
+        $this->db->join('absen', 'absen.idkaryawan=karyawan.karyawanid', 'left');
         $this->db->where('karyawan.karyawanid', $karyawanid);
         return $this->db->get();
     }

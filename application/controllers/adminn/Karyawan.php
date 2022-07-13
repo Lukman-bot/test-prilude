@@ -11,6 +11,7 @@ class Karyawan extends CI_Controller
         if ($this->session->userdata('hak_akses') != '2') {
             redirect('adminn/Auth', 'refresh');
         }
+        $this->load->model('Mod_absen', 'absen');
     }
 
     public function index()
@@ -200,6 +201,7 @@ class Karyawan extends CI_Controller
         $data['detail']         = $this->karyawan->getDetail($karyawanid)->row();
         $data['idKaryawan']     = $this->karyawan->getIdKaryawan();
         $data['footer']         = 'LukmanSoft';
+        $data['dataAbsen']      = $this->absen->getAbsen($karyawanid)->result();
 
         $this->load->view('admin/main', $data);
     }

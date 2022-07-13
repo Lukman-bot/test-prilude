@@ -37,4 +37,15 @@ class Mod_absen extends CI_Model
         $this->db->where('karyawan.karyawanid', $idkaryawan);
         return $this->db->get();
     }
+
+    public function getAbsen($karyawanid)
+    {
+        $this->db->select('*');
+        $this->db->from('absen');
+        $this->db->join('karyawan', 'karyawan.karyawanid=absen.idkaryawan', 'left');
+        $this->db->join('detailkaryawan', 'karyawan.karyawanid=detailkaryawan.idkaryawan', 'left');
+        $this->db->order_by('tanggal', 'desc');
+        $this->db->where('karyawan.karyawanid', $karyawanid);
+        return $this->db->get();
+    }
 }
