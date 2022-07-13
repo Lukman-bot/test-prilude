@@ -1,25 +1,11 @@
-    <!-- Page Heading -->
+
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data User</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= base_url('superadminn/Dashboard') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item"><a href="<?= base_url('adminn/Home') ?>">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Absen</li>
         </ol>
     </div>
-
-    <!-- Alert -->
-    <div class="row">
-        <div class="col">
-            <?php if($this->session->flashdata('message')) : ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= $this->session->flashdata('message') ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>   
-                </div>
-            <?php endif ?>
-        </div> 
-    </div> 
 
     <div class="row">
         <div class="col">
@@ -88,4 +74,3 @@
             </div>
         </div>
     </div>
-
