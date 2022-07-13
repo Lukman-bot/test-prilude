@@ -109,4 +109,14 @@ class Mod_karyawan extends CI_Model {
 
         $this->db->insert('detailkaryawan', $data);
     }
+
+    public function getProfile($karyawanid)
+    {
+        $this->db->select('*');
+        $this->db->from('karyawan');
+        $this->db->join('detailkaryawan', 'karyawan.karyawanid=detailkaryawan.idkaryawan', 'left');
+        $this->db->where('karyawan.karyawanid', $karyawanid);
+
+        return $this->db->get();
+    }
 }
