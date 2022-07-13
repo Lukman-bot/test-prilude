@@ -174,7 +174,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="simpleDataInput" name="tanggallahirkaryawan" placeholder="06/04/2004">
+                                <input type="date" value="" class="form-control" id="simpleDataInput" name="tanggallahirkaryawan" placeholder="06/04/2004">
                             </div>
                         </div>
 
