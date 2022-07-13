@@ -22,6 +22,7 @@ class Auth extends CI_Controller {
                             'is_login'      => TRUE
                         );
                         $this->session->set_userdata($session_data);
+                        $this->session->set_flashdata('message', 'Selamat Datang!');
 
                         redirect('Dashboard');
                     } else {

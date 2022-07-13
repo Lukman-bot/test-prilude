@@ -9,16 +9,16 @@
 
     <div class="row">
         <div class="col">
-            <?php if($this->session->flashdata('success')): ?>
+            <?php if($this->session->flashdata('berhasil')): ?>
                 <div class="alert alert-success alert-dissmissable fade show" role="alert">
-                    <?= $this->session->flashdata('success') ?>
+                    <?= $this->session->flashdata('berhasil') ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            <?php elseif($this->session->flashdata('error')) : ?>
+            <?php elseif($this->session->flashdata('gagal')) : ?>
                 <div class="alert alert-error alert-dismissible fade show" role="alert">
-                    <?= $this->session->flashdata('error') ?>.
+                    <?= $this->session->flashdata('gagal') ?>.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -26,8 +26,6 @@
             <?php endif ?>
         </div>
     </div>
-
-    
 
     <div class="row">
         <div class="col-lg-12">

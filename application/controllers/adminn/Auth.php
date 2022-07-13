@@ -29,8 +29,10 @@ class Auth extends CI_Controller {
 
                         if ($session_data['hak_akses'] == '1') {
                             // redirect('adminn/Home');
+                            $this->session->set_flashdata('message', 'Selamat Datang!');
                             redirect('super/Home');
                         } else if ($session_data['hak_akses'] == '2') {
+                            $this->session->set_flashdata('message', 'Selamat Datang');
                             redirect('adminn/Home');
                         }
 
