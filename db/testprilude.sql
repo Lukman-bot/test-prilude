@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jul 2022 pada 10.40
+-- Waktu pembuatan: 13 Jul 2022 pada 12.06
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 7.4.22
 
@@ -54,7 +54,7 @@ INSERT INTO `absen` (`absenid`, `idkaryawan`, `tanggal`, `absen`) VALUES
 
 CREATE TABLE `akses` (
   `aksesid` int(11) NOT NULL,
-  `akses` enum('SA','ADM') NOT NULL,
+  `akses` enum('SA','ADM','USR') NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,7 +64,8 @@ CREATE TABLE `akses` (
 
 INSERT INTO `akses` (`aksesid`, `akses`, `description`) VALUES
 (1, 'SA', 'SuperAdmin'),
-(2, 'ADM', 'Administrator');
+(2, 'ADM', 'Administrator'),
+(3, 'USR', 'User');
 
 -- --------------------------------------------------------
 
@@ -101,6 +102,7 @@ INSERT INTO `detailkaryawan` (`detailid`, `idkaryawan`, `namakaryawan`, `notelep
 
 CREATE TABLE `karyawan` (
   `karyawanid` int(11) NOT NULL,
+  `idakses` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` text NOT NULL,
   `photo` text NOT NULL,
@@ -112,10 +114,11 @@ CREATE TABLE `karyawan` (
 -- Dumping data untuk tabel `karyawan`
 --
 
-INSERT INTO `karyawan` (`karyawanid`, `username`, `password`, `photo`, `created_at`, `updated_at`) VALUES
-(2, 'lukman@karyawan.com', '$2y$10$qB.Yqw1UbBl2.XN2PNwmV.B7GHxeJ3TLp6BIYnI2q.qtUUQnCtDlO', 'lukmankaryawancom-Karyawan.jpg', '2022-07-12 16:10:39', '2022-07-12 16:10:39'),
-(3, 'lukmanaditiyaanggara@karyawan.com', '$2y$10$No9UmwU7MvxzhY/xpy/4deNHJpf9r4C8.nU86j0Wi7VaALlcmuCMC', 'lukmanaditiyaanggarakaryawancom-Karyawan.png', '2022-07-13 05:22:46', '2022-07-13 05:23:08'),
-(4, 'lukmanaditiya@karyawan.com', '$2y$10$smAr3AnM5C3r6eQ/n4iBhOij7trkDArmJUauaqVbXUR.cyps/UNti', 'lukmanaditiyakaryawancom-Karyawan.png', '2022-07-13 05:26:25', '2022-07-13 05:26:25');
+INSERT INTO `karyawan` (`karyawanid`, `idakses`, `username`, `password`, `photo`, `created_at`, `updated_at`) VALUES
+(2, 3, 'lukman@karyawan.com', '$2y$10$qB.Yqw1UbBl2.XN2PNwmV.B7GHxeJ3TLp6BIYnI2q.qtUUQnCtDlO', 'lukmankaryawancom-Karyawan.jpg', '2022-07-12 16:10:39', '2022-07-13 09:30:49'),
+(3, 3, 'lukmanaditiyaanggara@karyawan.com', '$2y$10$No9UmwU7MvxzhY/xpy/4deNHJpf9r4C8.nU86j0Wi7VaALlcmuCMC', 'lukmanaditiyaanggarakaryawancom-Karyawan.png', '2022-07-13 05:22:46', '2022-07-13 09:30:49'),
+(4, 3, 'lukmanaditiya@karyawan.com', '$2y$10$smAr3AnM5C3r6eQ/n4iBhOij7trkDArmJUauaqVbXUR.cyps/UNti', 'lukmanaditiyakaryawancom-Karyawan.png', '2022-07-13 05:26:25', '2022-07-13 09:30:49'),
+(5, 3, 'zeni@karyawan.com', '$2y$10$FBicAUGMG8HT2DY/xgVzD.TIJKOfTODkZmmcS9XfapbfrxMYQGfMO', 'zenikaryawancom-Karyawan.png', '2022-07-13 09:36:02', '2022-07-13 09:36:02');
 
 -- --------------------------------------------------------
 
@@ -218,7 +221,8 @@ ALTER TABLE `detailkaryawan`
 -- Indeks untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  ADD PRIMARY KEY (`karyawanid`);
+  ADD PRIMARY KEY (`karyawanid`),
+  ADD KEY `idakses` (`idakses`);
 
 --
 -- Indeks untuk tabel `menu`
@@ -255,7 +259,7 @@ ALTER TABLE `absen`
 -- AUTO_INCREMENT untuk tabel `akses`
 --
 ALTER TABLE `akses`
-  MODIFY `aksesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `aksesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `detailkaryawan`
@@ -267,7 +271,7 @@ ALTER TABLE `detailkaryawan`
 -- AUTO_INCREMENT untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `karyawanid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `karyawanid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu`
@@ -292,6 +296,24 @@ ALTER TABLE `user`
 --
 
 --
+-- Ketidakleluasaan untuk tabel `absen`
+--
+ALTER TABLE `absen`
+  ADD CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`idkaryawan`) REFERENCES `karyawan` (`karyawanid`);
+
+--
+-- Ketidakleluasaan untuk tabel `detailkaryawan`
+--
+ALTER TABLE `detailkaryawan`
+  ADD CONSTRAINT `detailkaryawan_ibfk_1` FOREIGN KEY (`idkaryawan`) REFERENCES `karyawan` (`karyawanid`);
+
+--
+-- Ketidakleluasaan untuk tabel `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`idakses`) REFERENCES `akses` (`aksesid`);
+
+--
 -- Ketidakleluasaan untuk tabel `menu`
 --
 ALTER TABLE `menu`
@@ -302,6 +324,12 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `submenus`
   ADD CONSTRAINT `submenus_ibfk_1` FOREIGN KEY (`menuid`) REFERENCES `menu` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`idakses`) REFERENCES `akses` (`aksesid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,10 +11,6 @@
                 <span class="ml-2 d-none d-lg-inline text-white small"><?= $user['namauser'] ?></span> 
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<?= base_url('auth/edit_user/' . $this->session->userdata('userid')) ?>">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-target="#logoutModal" data-toggle="modal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

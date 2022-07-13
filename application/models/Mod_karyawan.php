@@ -22,7 +22,8 @@ class Mod_karyawan extends CI_Model {
         return [
             'username'          => '',
             'password'          => '',
-            'photo'             => ''
+            'photo'             => '',
+            'idakses'
         ];
     }
 

@@ -64,6 +64,7 @@ class Karyawan extends CI_Controller
             $data = [
                 'username'              => $this->input->post('username', true),
                 'password'              => $passwordhash,
+                'idakses'               => '3'
             ];
 
             if (!empty($_FILES['photo']['name'])){
@@ -114,6 +115,7 @@ class Karyawan extends CI_Controller
             $data = [
                 'username'              => $this->input->post('username', true),
                 'password'              => $passwordhash,
+                'idakses'               => '3'
             ];
 
             if (!empty($_FILES['photo']['name'])) {
